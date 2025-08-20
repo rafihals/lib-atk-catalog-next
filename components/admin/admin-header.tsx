@@ -64,9 +64,11 @@ export function AdminHeader({ title, description }: AdminHeaderProps) {
                 <User className="mr-2 h-4 w-4" />
                 <span>Profil</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Pengaturan</span>
+              <DropdownMenuItem asChild>
+                <a href="/admin/settings">
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Pengaturan</span>
+                </a>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>

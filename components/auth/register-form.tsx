@@ -3,8 +3,6 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { register } from "@/lib/authService"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -26,9 +24,6 @@ export function RegisterForm() {
     acceptTerms: false,
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const [registerError, setRegisterError] = useState("")
-  const [registerSuccess, setRegisterSuccess] = useState("")
-  const router = useRouter()
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -71,21 +66,19 @@ export function RegisterForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setRegisterError("")
-    setRegisterSuccess("")
+
     if (!validateForm()) return
+
     setIsLoading(true)
+
+    // Simulate API call
     try {
-      await register({
-        email: formData.email,
-        password: formData.password,
-        fullName: formData.fullName,
-        phone: formData.phone,
-      })
-      setRegisterSuccess("Registrasi berhasil! Silakan cek email untuk verifikasi, lalu login.")
-      setTimeout(() => router.push("/login"), 2000)
-    } catch (error: any) {
-      setRegisterError(error?.message || "Gagal registrasi. Cek data Anda.")
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // TODO: Implement actual registration logic
+      console.log("Registration attempt:", formData)
+      // Redirect to login page or dashboard
+    } catch (error) {
+      console.error("Registration error:", error)
     } finally {
       setIsLoading(false)
     }
@@ -130,16 +123,6 @@ export function RegisterForm() {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-5">
-            {registerError && (
-              <div className="text-red-600 text-sm text-center font-medium border border-red-200 bg-red-50 rounded-lg py-2 mb-2">
-                {registerError}
-              </div>
-            )}
-            {registerSuccess && (
-              <div className="text-green-600 text-sm text-center font-medium border border-green-200 bg-green-50 rounded-lg py-2 mb-2">
-                {registerSuccess}
-              </div>
-            )}
             <div className="space-y-2">
               <Label htmlFor="fullName" className="text-slate-700 font-medium">
                 Nama Lengkap

@@ -18,6 +18,7 @@ import {
   ChevronRight,
   ShoppingBag,
   Eye,
+  Settings,
 } from "lucide-react"
 
 interface AdminSidebarProps {
@@ -36,6 +37,7 @@ export function AdminSidebar({ className }: AdminSidebarProps) {
     { name: "Kategori", href: "/admin/categories", icon: FolderOpen },
     { name: "Pengguna", href: "/admin/users", icon: Users },
     { name: "Laporan", href: "/admin/reports", icon: BarChart3 },
+    { name: "Pengaturan", href: "/admin/settings", icon: Settings }, // Added Settings menu item to sidebar navigation
   ]
 
   const handleLogout = () => {
